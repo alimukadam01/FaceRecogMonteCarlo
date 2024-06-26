@@ -82,8 +82,13 @@ class PredictFace(APIView):
 
         if request.method == 'POST':
 
-            roll = predict_face()
-
+            try:
+                roll = predict_face()
+            except Exception as error:
+                print(error)
+                return Response({
+                    "detail": "Internal Server Error."
+                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             student = Student.objects.get(roll = roll)
 
             if not Attendance.objects.filter(student = student, timestamp__date = datetime.now().date()).exists():
@@ -96,5 +101,5 @@ class PredictFace(APIView):
                         "status": "Attendance marked successfully"
                     }
                 }, status=status.HTTP_201_CREATED)
-            return Response({'detail': 'Attendance already marked.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'detail': 'Attendance already marked.'}, status=status.HTTP_200_OK)
 

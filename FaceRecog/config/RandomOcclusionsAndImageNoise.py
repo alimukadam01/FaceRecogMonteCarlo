@@ -36,7 +36,6 @@ def save_modified_image(image, output_folder, index):
     filepath = os.path.join(output_folder, filename)
     cv2.imwrite(filepath, image)
 
-
 def RandomOcclusionsAndImageNoise(folder, output_location):
     image_files = get_image_files(folder=folder)
 

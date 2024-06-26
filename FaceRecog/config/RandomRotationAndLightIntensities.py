@@ -47,13 +47,11 @@ def save_modified_image(image, output_folder, index):
 
 def RandomRotationAndLightIntensities(folder, output_location):
     image_files = get_image_files(folder=folder)
-
     if not image_files:
         print(f"No images found in the folder: {folder}")
         
     else:
         print(f"Found {len(image_files)} images in the temporary folder.")
-
         # Initialize count variables
         rotation_count = 0
         lightintensity_count = 0
@@ -61,8 +59,6 @@ def RandomRotationAndLightIntensities(folder, output_location):
         ratios = []
 
         next_index = get_next_image_index(image_files)
-
-
 
         # Simulate the assignment process
         for idx, image_file in enumerate(image_files):
@@ -76,7 +72,6 @@ def RandomRotationAndLightIntensities(folder, output_location):
             
             save_modified_image(modified_image, folder, next_index + idx +1)
 
-            
             # Calculate and store the ratio
             if lightintensity_count > 0:
                 ratio = rotation_count / lightintensity_count
