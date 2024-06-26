@@ -90,7 +90,11 @@ class PredictFace(APIView):
                 attendance = Attendance.objects.create(student=student)
                 serializer = AttendanceSerializer(attendance)
                 return Response({
-                    "detail": "Attendance marked for today."
+                    "detail": {
+                        "name": attendance.student.name,
+                        "date": attendance.timestamp,
+                        "status": "Attendance marked successfully"
+                    }
                 }, status=status.HTTP_201_CREATED)
             return Response({'detail': 'Attendance already marked.'}, status=status.HTTP_400_BAD_REQUEST)
 
